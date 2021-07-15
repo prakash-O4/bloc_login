@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:logss/cubit/navigation_cubit.dart';
+import 'package:logss/blocs/cubit/navigation_cubit.dart';
+import 'package:logss/blocs/cubit/session_cubit.dart';
 import 'package:logss/repositary/auth_repo.dart';
 import 'package:meta/meta.dart';
 
@@ -14,8 +15,9 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   // final FakeRepo _fakeRepo = FakeRepo();
   final AuthRepo _authRepo = AuthRepo();
+  final SessionCubit sessionCubit;
   final NavigationCubit navigationCubit;
-  LoginBloc({required this.navigationCubit}) : super(LoginState());
+  LoginBloc({required this.navigationCubit, required this.sessionCubit}) : super(LoginState());
 
   @override
   Stream<LoginState> mapEventToState(
@@ -38,7 +40,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         await _authRepo.logIn(
             email: state.email.trim(), password: state.password.trim());
         yield state.copyWith(status: SubmissionSuccess());
-        navigationCubit.homePage();
+        sessionCubit.showAuth();
       } catch (e) {
         //failed state
         yield state.copyWith(status: SubmissionFailed(exception: e.toString()));

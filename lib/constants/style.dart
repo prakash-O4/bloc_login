@@ -13,16 +13,12 @@ class StyleConstants {
 
 //for logo used in sign up and login page
   static Widget kCompanyLogo = CircleAvatar(
-    backgroundColor: Colors.green,
+    backgroundColor: Color(ColorConstants.kBackgroundColor),
     radius: 40,
     child: Center(
-      child: Text(
-        "PRA",
-        style: TextStyle(
-          fontSize: 30,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
+      child: Image.asset(
+        "images/icon.png",
+        fit: BoxFit.cover,
       ),
     ),
   );
@@ -93,6 +89,26 @@ class StyleConstants {
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(6),
+      ),
+    );
+  }
+
+  //button that will be displayed while authenticating
+  static Widget kLoadingButton() {
+    return ElevatedButton(
+      style: kButtonStyle,
+      onPressed: () {},
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(color: Colors.grey),
+            SizedBox(
+              width: 10,
+            ),
+            kButtonText("Loading..")
+          ],
+        ),
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:logss/cubit/navigation_cubit.dart';
+import 'package:logss/blocs/cubit/navigation_cubit.dart';
 import 'package:logss/repositary/auth_repo.dart';
 import '../../FormSubmissionStatus.dart';
 part 'signup_event.dart';
@@ -38,7 +38,10 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
       yield state.copyWith(status: FormSubmitting());
       try {
         await _authRepo.signUp(
-            email: state.email.trim(), password: state.password.trim());
+          email: state.email.trim(),
+          password: state.password.trim(),
+          name: state.username.trim(),
+        );
         yield state.copyWith(status: SubmissionSuccess());
         navigationCubit.showLogIn();
       } catch (e) {

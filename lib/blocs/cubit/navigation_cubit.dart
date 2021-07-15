@@ -13,7 +13,6 @@ class NavigationCubit extends Cubit<NavigationState> {
   //home page state
   void homePage() {
     emit(NavigationState.HomePage);
-    print("home state emitted");
   }
 
   //signing out

@@ -1,20 +1,20 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logss/FormSubmissionStatus.dart';
 import 'package:logss/blocs/SignUp/signup_bloc.dart';
+import 'package:logss/blocs/cubit/navigation_cubit.dart';
 import 'package:logss/constants/color.dart';
 import 'package:logss/constants/style.dart';
-import 'package:logss/cubit/navigation_cubit.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+import '../../FormSubmissionStatus.dart';
+
+class SignUpWidget extends StatefulWidget {
+  const SignUpWidget({Key? key}) : super(key: key);
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _SignUpWidgetState createState() => _SignUpWidgetState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpWidgetState extends State<SignUpWidget> {
   final _finalSignUpKey = GlobalKey<FormState>();
   late SignupBloc _signupBloc;
   @override
@@ -25,57 +25,48 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   void dispose() {
-    super.dispose();
     _signupBloc.close();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(ColorConstants.kBackgroundColor),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
+    return Form(
+      key: _finalSignUpKey,
+      child: Column(
+        children: [
+          Padding(
             padding: const EdgeInsets.only(
-              right: 18,
-              left: 18,
               top: 20,
             ),
-            child: Form(
-              key: _finalSignUpKey,
-              child: Column(
-                children: [
-                  StyleConstants.kCompanyLogo,
-                  SizedBox(height: 4),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      StyleConstants.kAuthText("SIGN UP NOW"),
-                      SizedBox(height: 4),
-                      StyleConstants.kAuthDetails(
-                          "Please fill the details and create account"),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      _userNameField(),
-                      SizedBox(height: 14),
-                      _signUpEmail(),
-                      SizedBox(height: 14),
-                      _signUpPassword(),
-                      SizedBox(height: 14),
-                      _signUpConfPassword(),
-                      SizedBox(height: 14),
-                      _signUpButton(),
-                      SizedBox(height: 14),
-                      _goToLogIn(),
-                      SizedBox(height: 14),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            child: StyleConstants.kCompanyLogo,
           ),
-        ),
+          SizedBox(height: 16),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              StyleConstants.kAuthText("SIGN UP NOW"),
+              SizedBox(height: 12),
+              StyleConstants.kAuthDetails(
+                  "Please fill the details and create account"),
+              SizedBox(
+                height: 16,
+              ),
+              _userNameField(),
+              SizedBox(height: 20),
+              _signUpEmail(),
+              SizedBox(height: 20),
+              _signUpPassword(),
+              SizedBox(height: 20),
+              _signUpConfPassword(),
+              SizedBox(height: 20),
+              _signUpButton(),
+              SizedBox(height: 20),
+              _goToLogIn(),
+              SizedBox(height: 20),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -84,6 +75,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return BlocBuilder<SignupBloc, SignupState>(
       builder: (context, state) {
         return TextFormField(
+          textInputAction: TextInputAction.next,
+          cursorColor: Colors.pink,
           style: StyleConstants.kTextStyle,
           decoration: StyleConstants.input("Enter email address"),
           onChanged: (value) =>
@@ -98,6 +91,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return BlocBuilder<SignupBloc, SignupState>(
       builder: (context, state) {
         return TextFormField(
+          textInputAction: TextInputAction.next,
+          cursorColor: Colors.pink,
           style: StyleConstants.kTextStyle,
           decoration: StyleConstants.input("Enter password"),
           onChanged: (value) =>
@@ -113,6 +108,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return BlocBuilder<SignupBloc, SignupState>(
       builder: (context, state) {
         return TextFormField(
+          textInputAction: TextInputAction.done,
+          cursorColor: Colors.pink,
           style: StyleConstants.kTextStyle,
           decoration: StyleConstants.input("Confirm Password"),
           onChanged: (value) =>
@@ -128,8 +125,9 @@ class _SignUpPageState extends State<SignUpPage> {
     return BlocBuilder<SignupBloc, SignupState>(
       builder: (context, state) {
         return TextFormField(
-          style: StyleConstants.kTextStyle,
+          textInputAction: TextInputAction.next,
           cursorColor: Colors.pink,
+          style: StyleConstants.kTextStyle,
           decoration: StyleConstants.input("Enter username"),
           onChanged: (value) =>
               _signupBloc.add(SignUpNameChanged(userName: value)),
@@ -143,22 +141,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return BlocBuilder<SignupBloc, SignupState>(
       builder: (context, state) {
         var _status = state.status;
-        if (state.status is FormSubmitting) {
-          return Center(
-            child: CircularProgressIndicator(
-              color: Color(ColorConstants.kButtonColor),
-            ),
-          );
-        } else if (_status is SubmissionFailed) {
-          return Center(
-            child: Text(
-              _status.exception,
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.pink,
-              ),
-            ),
-          );
+        if (_status is FormSubmitting) {
+          return StyleConstants.kLoadingButton();
         }
         return ElevatedButton(
             style: StyleConstants.kButtonStyle,

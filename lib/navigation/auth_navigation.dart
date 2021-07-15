@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logss/blocs/Login/login_bloc.dart';
-import 'package:logss/blocs/SignUp/signup_bloc.dart';
-import 'package:logss/cubit/navigation_cubit.dart';
+import 'package:logss/blocs/cubit/navigation_cubit.dart';
 import 'package:logss/presentation/home/home_view.dart';
-import 'package:logss/presentation/login_view.dart';
-import 'package:logss/presentation/signup_view.dart';
+import 'package:logss/presentation/login/login_view.dart';
+import 'package:logss/presentation/signup/signup_view.dart';
 
 class AuthNavigation extends StatefulWidget {
   const AuthNavigation({Key? key}) : super(key: key);
@@ -23,21 +21,11 @@ class _AuthNavigationState extends State<AuthNavigation> {
           pages: [
             if (state == NavigationState.SignUp)
               MaterialPage(
-                child: BlocProvider(
-                  create: (context) => SignupBloc(
-                    navigationCubit: BlocProvider.of<NavigationCubit>(context),
-                  ),
-                  child: SignUpPage(),
-                ),
+                child: SignUpPage(),
               ),
             if (state == NavigationState.LogIn)
               MaterialPage(
-                child: BlocProvider(
-                  create: (context) => LoginBloc(
-                      navigationCubit:
-                          BlocProvider.of<NavigationCubit>(context)),
-                  child: LogInPage(),
-                ),
+                child: LogInPage(),
               ),
             if (state == NavigationState.HomePage)
               MaterialPage(
