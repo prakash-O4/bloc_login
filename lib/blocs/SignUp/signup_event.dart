@@ -36,3 +36,8 @@ class SignUpSubmitted extends SignupEvent {
   @override
   List<Object?> get props => throw UnimplementedError();
 }
+
+class GoogleSignedIn extends SignupEvent{
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}

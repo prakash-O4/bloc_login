@@ -15,12 +15,12 @@ class StyleConstants {
   static Widget kCompanyLogo = CircleAvatar(
     backgroundColor: Color(ColorConstants.kBackgroundColor),
     radius: 40,
-    child: Center(
-      child: Image.asset(
-        "images/icon.png",
-        fit: BoxFit.cover,
-      ),
-    ),
+    // child: Center(
+    //   child: Image.asset(
+    //     "images/icon.png",
+    //     fit: BoxFit.cover,
+    //   ),
+    // ),
   );
 
   static ButtonStyle? kButtonStyle = ElevatedButton.styleFrom(

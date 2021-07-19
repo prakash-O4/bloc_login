@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.logss">
    <application
-        android:label="logss"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Bloc Login"
+        android:icon="@mipmap/icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

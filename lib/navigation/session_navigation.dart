@@ -18,12 +18,14 @@ class _SessionNavigationState extends State<SessionNavigation> {
   Widget build(BuildContext context) {
     return BlocBuilder<SessionCubit, SessionState>(
       builder: (context, state) {
-        print(state.toString());
+        // print(state.toString());
         return Navigator(
           pages: [
             if (state is Authenticated)
               MaterialPage(
-                child: HomePage(),
+                child: HomePage(
+                  user: state.user,
+                ),
               ),
             if (state is UnAuthenticated)
               MaterialPage(

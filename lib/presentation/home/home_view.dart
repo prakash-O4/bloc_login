@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,7 +6,8 @@ import 'package:logss/blocs/cubit/session_cubit.dart';
 import 'package:logss/constants/color.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final User? user;
+  const HomePage({required this.user});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -36,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Center(
         child: Text(
-          "Hello",
+          "Hello " + widget.user!.displayName.toString(),
           style: GoogleFonts.openSans(
             textStyle: TextStyle(
               fontSize: 20,
@@ -46,5 +48,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Widget logOutDialog(){
+    return AlertDialog();
   }
 }

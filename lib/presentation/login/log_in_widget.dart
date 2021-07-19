@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logss/blocs/Login/login_bloc.dart';
-import 'package:logss/constants/color.dart';
 import 'package:logss/constants/style.dart';
 import 'package:logss/blocs/cubit/navigation_cubit.dart';
 

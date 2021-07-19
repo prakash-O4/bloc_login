@@ -9,6 +9,9 @@ abstract class SessionState extends Equatable {
 
 class UnknownState extends SessionState {}
 
-class Authenticated extends SessionState {}
+class Authenticated extends SessionState {
+  final User? user;
+  Authenticated({required this.user});
+}
 
 class UnAuthenticated extends SessionState {}

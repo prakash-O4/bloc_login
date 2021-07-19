@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:logss/blocs/cubit/navigation_cubit.dart';
+import 'package:logss/blocs/cubit/session_cubit.dart';
 import 'package:logss/repositary/auth_repo.dart';
 import '../../FormSubmissionStatus.dart';
 part 'signup_event.dart';
@@ -11,7 +12,9 @@ part 'signup_state.dart';
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
   final AuthRepo _authRepo = AuthRepo();
   final NavigationCubit navigationCubit;
-  SignupBloc({required this.navigationCubit}) : super(SignupState());
+  final SessionCubit sessionCubit;
+  SignupBloc({required this.navigationCubit, required this.sessionCubit})
+      : super(SignupState());
 
   @override
   Stream<SignupState> mapEventToState(
@@ -51,6 +54,19 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           ),
         );
       }
+    } else if (event is GoogleSignedIn) {
+      yield state.copyWith(status: FormSubmitting());
+      try {
+        await _authRepo.googleSignIn();
+        yield state.copyWith(status: SubmissionSuccess());
+        sessionCubit.showAuth();
+      } catch (e) {
+        print(e.toString());
+        yield state.copyWith(status: SubmissionFailed(exception: e.toString()));
+      }
     }
   }
 }
+
+
+// 

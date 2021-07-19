@@ -20,7 +20,12 @@ class SessionCubit extends Cubit<SessionState> {
     }
   }
 
-  void showAuth() => emit(Authenticated());
+  void showAuth() {
+    var _user = getUserInfo();
+    emit(
+      Authenticated(user: _user),
+    );
+  }
 
   void showUnAuth() => emit(UnAuthenticated());
 
@@ -30,8 +35,8 @@ class SessionCubit extends Cubit<SessionState> {
     print("logged out");
   }
 
-  Future<User?> getUserInfo() async {
-    User? user = await _authRepo.getUser();
+  User? getUserInfo() {
+    User? user = _authRepo.getUser();
     return user;
   }
 }

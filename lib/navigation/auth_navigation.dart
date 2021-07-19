@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logss/blocs/cubit/navigation_cubit.dart';
-import 'package:logss/presentation/home/home_view.dart';
 import 'package:logss/presentation/login/login_view.dart';
 import 'package:logss/presentation/signup/signup_view.dart';
 
@@ -26,10 +25,6 @@ class _AuthNavigationState extends State<AuthNavigation> {
             if (state == NavigationState.LogIn)
               MaterialPage(
                 child: LogInPage(),
-              ),
-            if (state == NavigationState.HomePage)
-              MaterialPage(
-                child: HomePage(),
               ),
           ],
           onPopPage: (route, result) => route.didPop(result),

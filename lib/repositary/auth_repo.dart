@@ -1,7 +1,28 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepo {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  late final GoogleSignInAccount? _googleUser;
+  GoogleSignInAccount get user => _googleUser!;
+
+  Future<void> googleSignIn() async {
+    try {
+      _googleUser = await GoogleSignIn().signIn();
+      //get auth details from the request
+      final GoogleSignInAuthentication googleAuth =
+          await _googleUser!.authentication;
+      //creating a new credentials
+      final credentials = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+        accessToken: googleAuth.accessToken,
+      );
+      await firebaseAuth.signInWithCredential(credentials);
+    } on FirebaseAuthException catch (e) {
+      throw e.code.toString();
+    }
+  }
+
   Future<void> signUp(
       {required String email,
       required String password,
@@ -16,9 +37,7 @@ class AuthRepo {
       user!.updateDisplayName(name);
       // print(_user.user!.uid.toString());
     } on FirebaseAuthException catch (e) {
-      var messgae = e.code.toString();
-      print(messgae);
-      throw Exception(messgae);
+      throw (e.code.toString());
     }
   }
 
@@ -29,19 +48,20 @@ class AuthRepo {
       print(_user.user!.uid.toString());
     } on FirebaseAuthException catch (e) {
       print(e.message.toString());
-      throw Exception(e.code.toString());
+      throw (e.code.toString());
     }
   }
 
   Future<void> logOut() async {
     try {
+      await GoogleSignIn().disconnect();
       await firebaseAuth.signOut();
     } catch (e) {
       print(e.toString());
     }
   }
 
-  Future<User?> getUser() async {
+  User? getUser() {
     final user = firebaseAuth.currentUser;
     return user;
   }

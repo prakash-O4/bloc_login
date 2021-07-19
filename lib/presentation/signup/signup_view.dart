@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logss/blocs/SignUp/signup_bloc.dart';
+import 'package:logss/blocs/cubit/session_cubit.dart';
 import 'package:logss/constants/color.dart';
 import 'package:logss/blocs/cubit/navigation_cubit.dart';
 import 'package:logss/presentation/signup/sign_up_widget.dart';
@@ -20,7 +21,9 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SignupBloc(
-          navigationCubit: BlocProvider.of<NavigationCubit>(context)),
+        navigationCubit: BlocProvider.of<NavigationCubit>(context),
+        sessionCubit: BlocProvider.of<SessionCubit>(context),
+      ),
       child: Scaffold(
         backgroundColor: Color(ColorConstants.kBackgroundColor),
         body: SafeArea(

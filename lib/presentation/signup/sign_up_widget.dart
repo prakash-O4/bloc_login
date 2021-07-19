@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:logss/blocs/SignUp/signup_bloc.dart';
 import 'package:logss/blocs/cubit/navigation_cubit.dart';
 import 'package:logss/constants/color.dart';
@@ -64,6 +65,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
               SizedBox(height: 20),
               _goToLogIn(),
               SizedBox(height: 20),
+              _socialIcon()
             ],
           ),
         ],
@@ -162,7 +164,24 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           BlocProvider.of<NavigationCubit>(context).showLogIn();
         },
         child: Center(
-          child: Text("Go to Sign Up"),
+          child: Text("Go to Log In"),
+        ));
+  }
+
+  Widget _socialIcon() {
+    return CircleAvatar(
+        backgroundColor: Color(
+          ColorConstants.kBackgroundColor,
+        ),
+        radius: 20,
+        child: IconButton(
+          onPressed: () {
+            _signupBloc.add(GoogleSignedIn());
+          },
+          icon: Icon(
+            FontAwesomeIcons.google,
+            size: 20,
+          ),
         ));
   }
 }
