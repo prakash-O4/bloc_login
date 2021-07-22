@@ -38,7 +38,7 @@ class StyleConstants {
   static Widget kButtonText(String buttonText) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.only(top: 12, bottom: 12),
+        padding: const EdgeInsets.symmetric(vertical:12),
         child: Text(
           buttonText,
           style: TextStyle(
