@@ -36,3 +36,8 @@ class ArticlesUpdatd extends CrudEvent {
   @override
   List<Object?> get props => throw UnimplementedError();
 }
+
+class GetImage extends CrudEvent {
+  @override
+  List<Object?> get props => [];
+}

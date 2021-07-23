@@ -14,6 +14,11 @@ class CrudLoading extends CrudState {
   List<Object?> get props => [];
 }
 
+class CrudSuccess extends CrudState {
+  @override
+  List<Object?> get props => [];
+}
+
 class CrudLoaded extends CrudState {
   final List<AuthCredentials> authCredentials;
   CrudLoaded({required this.authCredentials});
@@ -26,4 +31,11 @@ class CrudError extends CrudState {
   CrudError({required this.error});
   @override
   List<Object?> get props => [error];
+}
+
+class CrudImage extends CrudState {
+  final File file;
+  CrudImage({required this.file});
+  @override
+  List<Object?> get props => [file];
 }

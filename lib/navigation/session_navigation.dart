@@ -23,9 +23,7 @@ class _SessionNavigationState extends State<SessionNavigation> {
           pages: [
             if (state is Authenticated)
               MaterialPage(
-                child: HomePage(
-                  user: state.user,
-                ),
+                child: HomePage(user: state.user),
               ),
             if (state is UnAuthenticated)
               MaterialPage(

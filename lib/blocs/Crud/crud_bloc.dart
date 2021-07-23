@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -10,7 +11,6 @@ part 'crud_state.dart';
 
 class CrudBloc extends Bloc<CrudEvent, CrudState> {
   final CRUDRepo _crudRepo = CRUDRepo();
-  // ignore: cancel_subscriptions
   StreamSubscription? _streamSubscription;
   CrudBloc() : super(CrudInitial());
 
@@ -19,8 +19,12 @@ class CrudBloc extends Bloc<CrudEvent, CrudState> {
     CrudEvent event,
   ) async* {
     if (event is AddArticles) {
+      yield CrudLoading();
       try {
-        await _crudRepo.addNotes(event.authCredentials);
+        AuthCredentials _authCredentials = event.authCredentials;
+        await _crudRepo.addNotes(_authCredentials);
+        print("before success");
+        yield CrudSuccess();
       } catch (e) {}
     } else if (event is ReadArticles) {
       yield CrudLoading();
@@ -39,13 +43,22 @@ class CrudBloc extends Bloc<CrudEvent, CrudState> {
         yield CrudError(error: e.toString());
       }
     } else if (event is UpdateArticles) {
+      yield CrudLoading();
       try {
-        print("id is"+event.authCredentials.id);
         await _crudRepo.updateArticles(event.authCredentials);
         yield* _mapStreamToState();
-        print("finished update");
+        yield CrudSuccess();
       } catch (e) {
         yield CrudError(error: "update error");
+      }
+    } else if (event is GetImage) {
+      try {
+        var _file = await _crudRepo.getImage();
+        if (_file != null) {
+          yield CrudImage(file: _file);
+        }
+      } catch (e) {
+        yield CrudError(error: "Image error");
       }
     }
   }
@@ -53,7 +66,9 @@ class CrudBloc extends Bloc<CrudEvent, CrudState> {
   Stream<CrudState> _mapStreamToState() async* {
     _crudRepo.getArticles().listen((event) {
       add(ArticlesUpdatd(auth: event));
+      print("events fired");
     });
+
     _streamSubscription?.cancel();
   }
 

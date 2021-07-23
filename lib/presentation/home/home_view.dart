@@ -129,6 +129,7 @@ class _HomeBodyState extends State<HomeBody> {
                               content: data[index].content,
                               isUpdate: true,
                               id: data[index].id,
+                              imagePath: data[index].image,
                             ),
                           ),
                         );
@@ -136,6 +137,7 @@ class _HomeBodyState extends State<HomeBody> {
                       child: HomeBlog(
                         title: data[index].title,
                         content: data[index].content,
+                        imagePath: data[index].image,
                       ),
                     );
                   },

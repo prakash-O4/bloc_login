@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,11 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 class HomeBlog extends StatelessWidget {
   final String title;
   final String content;
-  final String? imagePath;
+  final String imagePath;
   const HomeBlog({
     required this.title,
     required this.content,
-    this.imagePath,
+    required this.imagePath,
   });
 
   @override
@@ -31,19 +32,33 @@ class HomeBlog extends StatelessWidget {
             height: 250,
             child: Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5.0),
-                      topRight: Radius.circular(5.0)),
-                  child: Image(
-                    image: AssetImage("images/icon.png"),
-                    filterQuality: FilterQuality.high,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover,
-                    color: Colors.black45,
-                    colorBlendMode: BlendMode.darken,
-                  ),
-                ),
+                imagePath.isNotEmpty
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5.0),
+                            topRight: Radius.circular(5.0)),
+                        child: Image(
+                          image: CachedNetworkImageProvider(imagePath),
+                          filterQuality: FilterQuality.high,
+                          width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.cover,
+                          color: Colors.black45,
+                          colorBlendMode: BlendMode.darken,
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5.0),
+                            topRight: Radius.circular(5.0)),
+                        child: Image(
+                          image: AssetImage("images/icon.png"),
+                          filterQuality: FilterQuality.high,
+                          width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.cover,
+                          color: Colors.black45,
+                          colorBlendMode: BlendMode.darken,
+                        ),
+                      ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -76,6 +91,7 @@ class HomeBlog extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: 10),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 10.0),
             child: Column(
@@ -90,9 +106,13 @@ class HomeBlog extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10.0),
-                Text(content,
-                    style: GoogleFonts.openSans(
-                        color: Colors.yellow[100], fontSize: 13.0)),
+                Text(
+                  content,
+                  style: GoogleFonts.openSans(
+                    color: Colors.yellow[100],
+                    fontSize: 16.0,
+                  ),
+                ),
                 Container(
                   width: MediaQuery.of(context).size.width,
                   child: Row(
