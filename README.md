@@ -7,7 +7,7 @@ Bloggers is a blog app that is made by flutter language with firebase as a backe
 [x] Update blog 
 [x] Delete blog
 [x] Fetch blog from the server.
-[x] Clean UI 
+[x] Clean UI
 [x] Fetch User Details 
 
 
