@@ -71,18 +71,15 @@ class _AddArticlessState extends State<AddArticless> {
         elevation: 0,
         title: widget.isUpdate ? Text("Update Articles") : Text("Add Articles"),
         actions: [
-          !widget.isUpdate
-              ? IconButton(
-                  onPressed: () {
-                    BlocProvider.of<CrudBloc>(context).add(GetImage());
-                  },
-                  icon: Icon(
-                    Icons.image,
-                  ),
-                )
-              : Icon(
-                  null,
-                ),
+          if (!widget.isUpdate)
+            IconButton(
+              onPressed: () {
+                BlocProvider.of<CrudBloc>(context).add(GetImage());
+              },
+              icon: const Icon(
+                Icons.image,
+              ),
+            )
         ],
       ),
       body: SingleChildScrollView(
@@ -106,7 +103,7 @@ class _AddArticlessState extends State<AddArticless> {
                       controller: _titleController,
                       cursorColor: Colors.pink,
                       style: StyleConstants.kTextStyle,
-                      decoration: StyleConstants.input("Articles Titles"),
+                      decoration: StyleConstants.kInput("Articles Titles"),
                     ),
                   ],
                 ),
@@ -121,7 +118,7 @@ class _AddArticlessState extends State<AddArticless> {
                   maxLines: null,
                   style: StyleConstants.kTextStyle,
                   cursorColor: Colors.pink,
-                  decoration: StyleConstants.input("Articles Body"),
+                  decoration: StyleConstants.kInput("Articles Body"),
                 ),
               ),
               const SizedBox(height: 20),

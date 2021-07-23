@@ -42,29 +42,29 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             ),
             child: StyleConstants.kCompanyLogo,
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               StyleConstants.kAuthText("SIGN UP NOW"),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               StyleConstants.kAuthDetails(
                   "Please fill the details and create account"),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               _userNameField(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _signUpEmail(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _signUpPassword(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _signUpConfPassword(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _signUpButton(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _goToLogIn(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _socialIcon()
             ],
           ),
@@ -80,7 +80,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           textInputAction: TextInputAction.next,
           cursorColor: Colors.pink,
           style: StyleConstants.kTextStyle,
-          decoration: StyleConstants.input("Enter email address"),
+          decoration: StyleConstants.kInput("Enter email address"),
           onChanged: (value) =>
               _signupBloc.add(SignUpEmailChanged(email: value)),
           validator: (value) => state.isValidEmail ? null : "Enter valid email",
@@ -96,7 +96,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           textInputAction: TextInputAction.next,
           cursorColor: Colors.pink,
           style: StyleConstants.kTextStyle,
-          decoration: StyleConstants.input("Enter password"),
+          decoration: StyleConstants.kInput("Enter password"),
           onChanged: (value) =>
               _signupBloc.add(SignUpPasswordChanged(password: value)),
           validator: (value) =>
@@ -113,7 +113,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           textInputAction: TextInputAction.done,
           cursorColor: Colors.pink,
           style: StyleConstants.kTextStyle,
-          decoration: StyleConstants.input("Confirm Password"),
+          decoration: StyleConstants.kInput("Confirm Password"),
           onChanged: (value) =>
               _signupBloc.add(SignUpConfPassChanged(confPassword: value)),
           validator: (value) =>
@@ -130,7 +130,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           textInputAction: TextInputAction.next,
           cursorColor: Colors.pink,
           style: StyleConstants.kTextStyle,
-          decoration: StyleConstants.input("Enter username"),
+          decoration: StyleConstants.kInput("Enter username"),
           onChanged: (value) =>
               _signupBloc.add(SignUpNameChanged(userName: value)),
           validator: (value) => state.isValidateUserName ? null : "More than 3",
@@ -163,14 +163,14 @@ class _SignUpWidgetState extends State<SignUpWidget> {
         onPressed: () {
           BlocProvider.of<NavigationCubit>(context).showLogIn();
         },
-        child: Center(
+        child: const Center(
           child: Text("Go to Log In"),
         ));
   }
 
   Widget _socialIcon() {
     return CircleAvatar(
-        backgroundColor: Color(
+        backgroundColor: const Color(
           ColorConstants.kBackgroundColor,
         ),
         radius: 20,
@@ -178,7 +178,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           onPressed: () {
             _signupBloc.add(GoogleSignedIn());
           },
-          icon: Icon(
+          icon: const Icon(
             FontAwesomeIcons.google,
             size: 20,
           ),

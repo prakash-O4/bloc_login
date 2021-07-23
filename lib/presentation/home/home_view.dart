@@ -28,21 +28,21 @@ class _HomePageState extends State<HomePage> {
     return BlocProvider(
       create: (context) => CrudBloc(),
       child: Scaffold(
-        backgroundColor: Color(ColorConstants.kHomeColorCode),
+        backgroundColor: const Color(ColorConstants.kBackgroundColor),
         drawer: Drawer(
           elevation: 0,
           child: DrawerWidget(name: widget.user!.displayName),
         ),
         appBar: AppBar(
           elevation: 0.8,
-          backgroundColor: Color(ColorConstants.kBackgroundColor),
-          title: Text("Mero kam"),
+          backgroundColor: const Color(ColorConstants.kBackgroundColor),
+          title: const Text("Mero kam"),
           actions: [
             IconButton(
               onPressed: () {
                 BlocProvider.of<SessionCubit>(context).logOut();
               },
-              icon: Icon(Icons.logout, size: 20),
+              icon: const Icon(Icons.logout, size: 20),
             )
           ],
         ),
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                           isUpdate: false,
                         )));
           },
-          child: Center(
+          child: const Center(
             child: Icon(
               Icons.add,
               color: Colors.white,
@@ -92,7 +92,7 @@ class _HomeBodyState extends State<HomeBody> {
     return BlocBuilder<CrudBloc, CrudState>(
       builder: (context, state) {
         if (state is CrudLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (state is CrudLoaded) {
@@ -143,7 +143,7 @@ class _HomeBodyState extends State<HomeBody> {
                   },
                 );
         } else if (state is CrudError) {
-          return Center(
+          return const Center(
             child: Text(
               "error",
               style: TextStyle(fontSize: 20, color: Colors.red),
@@ -152,7 +152,7 @@ class _HomeBodyState extends State<HomeBody> {
         }
         return Center(
           child: Text(
-            "Fuck off",
+            "Unknown State",
             style: GoogleFonts.openSans(
               textStyle: TextStyle(
                 fontSize: 20,

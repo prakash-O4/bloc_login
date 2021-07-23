@@ -38,20 +38,21 @@ class _LogInWidgetState extends State<LogInWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               StyleConstants.kAuthText("LOG IN NOW"),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               StyleConstants.kAuthDetails(
-                  "Please fill the details and proceed further"),
-              SizedBox(
+                "Please fill the details and proceed further",
+              ),
+              const SizedBox(
                 height: 16,
               ),
               _emailField(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _passwordField(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _logIn(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _goToSignUp(),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ],
@@ -66,7 +67,7 @@ class _LogInWidgetState extends State<LogInWidget> {
           textInputAction: TextInputAction.next,
           cursorColor: Colors.pink,
           style: StyleConstants.kTextStyle,
-          decoration: StyleConstants.input("Enter email address"),
+          decoration: StyleConstants.kInput("Enter email address"),
           onChanged: (value) => _loginBloc.add(LogInEmailChanged(email: value)),
           validator: (value) =>
               state.isValidEmail ? null : "Enter correct email",
@@ -82,7 +83,7 @@ class _LogInWidgetState extends State<LogInWidget> {
           textInputAction: TextInputAction.done,
           cursorColor: Colors.pink,
           style: StyleConstants.kTextStyle,
-          decoration: StyleConstants.input("Enter your password"),
+          decoration: StyleConstants.kInput("Enter your password"),
           onChanged: (value) =>
               _loginBloc.add(LogInPasswordChanged(password: value)),
           validator: (value) => state.isValidPassword ? null : "Greater than 6",
@@ -115,7 +116,7 @@ class _LogInWidgetState extends State<LogInWidget> {
         onPressed: () {
           BlocProvider.of<NavigationCubit>(context).showSignUp();
         },
-        child: Center(
+        child: const Center(
           child: Text("Go to Sign Up"),
         ));
   }
@@ -125,7 +126,7 @@ class _LogInWidgetState extends State<LogInWidget> {
     return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
       message,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 18,
         color: Colors.white,
       ),

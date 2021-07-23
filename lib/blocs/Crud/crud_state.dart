@@ -6,7 +6,7 @@ abstract class CrudState extends Equatable {
 
 class CrudInitial extends CrudState {
   @override
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 class CrudLoading extends CrudState {

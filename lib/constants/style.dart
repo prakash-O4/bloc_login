@@ -6,13 +6,13 @@ class StyleConstants {
   StyleConstants._();
 
 //for textfield input text style
-  static TextStyle kTextStyle = TextStyle(
+  static TextStyle kTextStyle = const TextStyle(
     color: Colors.white,
     fontSize: 20,
   );
 
 //for logo used in sign up and login page
-  static Widget kCompanyLogo = CircleAvatar(
+  static Widget kCompanyLogo = const CircleAvatar(
     backgroundColor: Color(ColorConstants.kBackgroundColor),
     radius: 40,
     // child: Center(
@@ -24,13 +24,9 @@ class StyleConstants {
   );
 
   static ButtonStyle? kButtonStyle = ElevatedButton.styleFrom(
-    primary: Color(
-      ColorConstants.kButtonColor,
-    ),
+    primary: const Color(ColorConstants.kButtonColor),
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(
-        6,
-      ),
+      borderRadius: BorderRadius.circular(6),
     ),
   );
 
@@ -38,10 +34,10 @@ class StyleConstants {
   static Widget kButtonText(String buttonText) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical:12),
+        padding: const EdgeInsets.symmetric(vertical: 12),
         child: Text(
           buttonText,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 22,
             color: Colors.white,
           ),
@@ -75,7 +71,7 @@ class StyleConstants {
   }
 
 //for signup and login textfield decoration
-  static InputDecoration? input(String hintText) {
+  static InputDecoration? kInput(String hintText) {
     return InputDecoration(
       focusedBorder: OutlineInputBorder(
         borderSide: const BorderSide(
@@ -84,7 +80,7 @@ class StyleConstants {
       ),
       hintText: hintText,
       hintStyle: TextStyle(
-        color: Color(ColorConstants.kHintTextColor),
+        color: const Color(ColorConstants.kHintTextColor),
         fontSize: 18,
       ),
       border: OutlineInputBorder(
@@ -102,8 +98,8 @@ class StyleConstants {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(color: Colors.grey),
-            SizedBox(
+            const CircularProgressIndicator(color: Colors.grey),
+            const SizedBox(
               width: 10,
             ),
             kButtonText("Loading..")

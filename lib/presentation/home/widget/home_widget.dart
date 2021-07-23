@@ -17,7 +17,7 @@ class HomeBlog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         border: Border.all(
@@ -79,9 +79,16 @@ class HomeBlog extends StatelessWidget {
                   right: 8,
                   child: IconButton(
                     onPressed: () {
-                      // PopupMenuButton<String>(itemBuilder: ,);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: const Text(
+                        "Tap to update post\nLong press to delete post",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                        ),
+                      )));
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.more_vert,
                       size: 28,
                       color: Colors.yellow,
@@ -105,7 +112,7 @@ class HomeBlog extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Text(
                   content,
                   style: GoogleFonts.openSans(
@@ -136,7 +143,7 @@ class HomeBlog extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 5.0)
+                const SizedBox(height: 5.0)
               ],
             ),
           ),

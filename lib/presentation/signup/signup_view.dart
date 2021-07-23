@@ -25,7 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
         sessionCubit: BlocProvider.of<SessionCubit>(context),
       ),
       child: Scaffold(
-        backgroundColor: Color(ColorConstants.kBackgroundColor),
+        backgroundColor: const Color(ColorConstants.kBackgroundColor),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -42,7 +42,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       SnackBar(
                         content: Text(
                           _status.exception,
-                          style: TextStyle(fontSize: 18, color: Colors.white),
+                          style: const TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                     );

@@ -12,9 +12,7 @@ class DrawerWidget extends StatelessWidget {
         gradient: LinearGradient(
           colors: [
             Colors.blueGrey,
-            Color(
-              ColorConstants.kBackgroundColor,
-            )
+            const Color(ColorConstants.kBackgroundColor),
           ],
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
@@ -46,7 +44,7 @@ class DrawerWidget extends StatelessWidget {
                   SizedBox(height: 10),
                   Text(
                     "Hello, $name !",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20,
                       color: Colors.white,
                     ),
@@ -55,7 +53,7 @@ class DrawerWidget extends StatelessWidget {
               ),
             ),
           ),
-          Divider(
+          const Divider(
             color: Colors.grey,
           ),
           Expanded(
@@ -63,14 +61,10 @@ class DrawerWidget extends StatelessWidget {
             child: Container(
                 child: ListView(
               children: [
-                DrawerTiles(
-                  icon: Icons.home,
-                  text: "Home",
-                ),
-                DrawerTiles(icon: Icons.favorite, text: "Favorite"),
-                DrawerTiles(icon: Icons.person, text: "Profile"),
-                DrawerTiles(icon: Icons.feedback, text: "Feedback"),
-                DrawerTiles(icon: Icons.logout, text: "Log Out"),
+                const DrawerTiles(icon: Icons.home, text: "Home"),
+                const DrawerTiles(icon: Icons.favorite, text: "Favorite"),
+                const DrawerTiles(icon: Icons.person, text: "Profile"),
+                const DrawerTiles(icon: Icons.feedback, text: "Feedback"),
               ],
             )),
           ),
@@ -83,10 +77,8 @@ class DrawerWidget extends StatelessWidget {
 class DrawerTiles extends StatelessWidget {
   final String text;
   final IconData icon;
-  const DrawerTiles({
-    required this.icon,
-    required this.text,
-  });
+  final Function()? onTap;
+  const DrawerTiles({required this.icon, required this.text, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +87,7 @@ class DrawerTiles extends StatelessWidget {
       child: ListTile(
         selected: true,
         selectedTileColor: Colors.red,
-        onTap: () {
-          print("index");
-        },
+        onTap: onTap,
         leading: Icon(
           icon,
           size: 20,
@@ -105,7 +95,7 @@ class DrawerTiles extends StatelessWidget {
         ),
         title: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             color: Colors.white,
           ),
