@@ -11,6 +11,12 @@ class StyleConstants {
     fontSize: 20,
   );
 
+//for loading button
+  static Widget kLoadingIcon = const Center(
+    child: CircularProgressIndicator(
+      color: const Color(ColorConstants.kButtonColor),
+    ),
+  );
 //for logo used in sign up and login page
   static Widget kCompanyLogo = const CircleAvatar(
     backgroundColor: Color(ColorConstants.kBackgroundColor),

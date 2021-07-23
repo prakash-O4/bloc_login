@@ -67,6 +67,15 @@ class _AddArticlessState extends State<AddArticless> {
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(ColorConstants.kBackgroundColor),
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+          ),
+        ),
         backgroundColor: const Color(ColorConstants.kBackgroundColor),
         elevation: 0,
         title: widget.isUpdate ? Text("Update Articles") : Text("Add Articles"),

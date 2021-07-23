@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logss/blocs/Crud/crud_bloc.dart';
 import 'package:logss/blocs/cubit/session_cubit.dart';
 import 'package:logss/constants/color.dart';
+import 'package:logss/constants/style.dart';
 import 'package:logss/presentation/home/drawer.dart';
 import 'package:logss/presentation/home/new_articles.dart';
 import 'package:logss/presentation/home/widget/home_widget.dart';
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: const Color(ColorConstants.kBackgroundColor),
         drawer: Drawer(
-          elevation: 0,
+          elevation: 1,
           child: DrawerWidget(name: widget.user!.displayName),
         ),
         appBar: AppBar(
@@ -92,9 +93,7 @@ class _HomeBodyState extends State<HomeBody> {
     return BlocBuilder<CrudBloc, CrudState>(
       builder: (context, state) {
         if (state is CrudLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return StyleConstants.kLoadingIcon;
         } else if (state is CrudLoaded) {
           var data = state.authCredentials;
           return data.length == 0
@@ -102,7 +101,7 @@ class _HomeBodyState extends State<HomeBody> {
                   child: Text(
                     "No articles found",
                     style: GoogleFonts.openSans(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontSize: 20,
                         color: Colors.white30,
                       ),
@@ -150,17 +149,7 @@ class _HomeBodyState extends State<HomeBody> {
             ),
           );
         }
-        return Center(
-          child: Text(
-            "Unknown State",
-            style: GoogleFonts.openSans(
-              textStyle: TextStyle(
-                fontSize: 20,
-                color: Colors.white30,
-              ),
-            ),
-          ),
-        );
+        return StyleConstants.kLoadingIcon;
       },
     );
   }
