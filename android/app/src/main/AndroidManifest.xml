@@ -2,7 +2,7 @@
     package="com.example.logss">
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
-        android:label="Bloc Login"
+        android:label="Bloggers"
         android:icon="@mipmap/icon">
         <activity
             android:name=".MainActivity"
